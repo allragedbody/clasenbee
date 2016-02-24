@@ -2,6 +2,7 @@ package models
 
 import (
 	// "allragedbody/clasenbee/contorllers"
+	// "errors"
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -9,11 +10,11 @@ import (
 )
 
 type FileModule struct {
-	Id         int64
-	Name       string
-	ChName     string
-	Path       string
-	Desc       string
+	Id         int64  `json:id`
+	Name       string `json:name`
+	ChName     string `json:chname`
+	Path       string `json:path`
+	Desc       string `json:description`
 	Params     string
 	CreateTime string
 	UpdateTime string
@@ -35,14 +36,14 @@ func init() {
 	orm.RunSyncdb("default", false, true)
 }
 
-func (fm *FileModule) InsertFileModule() {
+func (fm *FileModule) InsertFileModule() error {
 	var ormFileModel orm.Ormer = orm.NewOrm()
 	x, err := ormFileModel.Insert(fm)
 	if err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Printf("Insert Success id:%v  \n", x)
+		return err
 	}
+	fmt.Printf("insert filemodule id:%v \n", x)
+	return nil
 }
 
 func (fm *FileModule) ReadFileModule() {
