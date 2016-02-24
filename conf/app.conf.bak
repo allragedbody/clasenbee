@@ -1,0 +1,11 @@
+appname = clasenbee
+httpport = 80
+runmode = dev
+
+[MysqlDB]
+db = mysql
+user = admin
+pass = admin
+name = cdn_test
+url = 192.168.193.135:3306
+

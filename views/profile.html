@@ -1,0 +1,26 @@
+<!DOCTYPE <html>
+  <head>
+    <meta charset="utf-8">
+    <title>用户配置</title>
+  </head>
+  <body>
+  <div>
+    <form>
+      <table>
+        <tr>
+          <td> USERID: </td>
+          <td><input  name="userid" value={{.userid}} ></td>
+        </tr>
+        <tr>
+        <td>Tag:</td>
+        <td><input  name="tag" value={{.tag}}></td>
+        </tr>
+        <td>Email:</td>
+        <td><input  name="email" value={{range $index,$value:=.hobby}}{{if $index}},{{end}}{{.}}{{end}}></td>
+        </tr>
+      </table>
+    </form>
+    {{template "footer.html"}}
+  </div>
+  </body>
+</html>>

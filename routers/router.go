@@ -8,6 +8,7 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/api/modinfo", &controllers.ModuleController{}, "get:GetModeInfo")
+	beego.Router("/user/profile", &controllers.UserController{}, `get:Profile`)
 	beego.Router("/api/createmodule", &controllers.ModuleController{}, "post:CreateModule")
 	beego.Router("/api/modifymodule", &controllers.ModuleController{}, "post:ModifyModule")
 	beego.Router("/api/deletemodule", &controllers.ModuleController{}, "post:DeleteModule")
