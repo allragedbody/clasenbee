@@ -1,0 +1,137 @@
+1、git基本配置
+
+git config --global  user.name  jdcdn+Hostname
+git config --global  user.email  cdn@jdcdn.com
+#git config --global color.ui true
+
+#列出git全局配置列表
+#git config --list
+
+#保存为home目录下的gitconfig
+
+2、创建或者clone仓库
+repository 仓库
+1）创建
+mkdir project
+cd project
+git init
+会在project目录下创建一个.git文件，这个就是保存版本的地方。
+
+2）clone
+git clone http://github.com/kennethreitz/requesets.git
+
+3、如何添加文件并提交。
+git status 查看git仓库的状态。
+untracked files 这两个文件没有登记。
+git add 注册文件 。(git add --all)
+git commit -m "提交记录"
+
+
+git commit -am "提交记录" 直接提交，不通过staging area。
+
+过程描述
+working directory 工作区 运行git add之后，会放到下面的区域
+staging area（cache，index）    git commit 会放到下面的区域
+history 最终目标。
+
+4、查看git状态
+去掉临时文件
+echo '*~'>.gitignore
+git status -s 得到 简化信息 status 标识位的含义。
+
+5、查看文件差别
+git diff 检查 working dir 和 staging area的区别
+git diff --staged 查看staging area和 history的区别。
+如果想查看history和working directory怎么查看
+
+git diff HEAD HEAD表示当前的状态。
+history 中存放的是文件的快照。
+HEAD是标签指向第一个history快照
+HEAD~1指的是倒数第二个快照
+HEAD~2指的倒数第三个快照，以此类推。
+
+git diff --stat HEAD 
+
+6、撤销错误的操作。
+把staging area的文件的修改撤销掉。
+git reset HEAD就是将history里面的第一个快照恢复到 staging area里面。
+git checkout --all 将working directory的文件修改 为staging area中的。
+git checkout HEAD 将history 文件直接修改到master的 working directory。
+
+7、删除和重命名
+1）删除文件
+git rm old.py
+git  status -s 能看到D标识。
+git rm --cached code.py 删除文件但是保留working directory 中的文件。
+
+2）对文件进行重命名
+git move 1 2
+git status -s 发现有R标识staging数据做了变化。
+
+8、暂存工作区
+git  stash 过程。
+git stash list  stash就是隐藏的意思。将之前的更改放进一个暂存区存起来，得到最初的代码。
+git stash pop
+
+9、history详解
+存放commit对象的地方，因此history也叫作commit history
+每一个commit对象都由一个校验值，游标HEAD只想最后一个commit。
+
+tree 目录树，所有的文件都存放在这个树里面
+parent  父子关系。
+以及其他属性。
+
+parent指向前面一个commit对象。每个commit对象里面是一个目录tree
+commit history就是commit对象集合。 HEAD~表示前面一个
+
+每个commit还有一些属性，查看属性命令
+git cat-file -t HEAD  结果显示为commit
+git cat-file -p HEAD  结果显示内容包括
+
+tree  tree的校验码，不是commit的校验码
+parent 上一个commit校验码
+author 作者名称 邮箱号 时间戳  
+committer 提交者名称 邮箱号 时间戳  
+
+git cat-file -t efdae（tree编号）  结果显示内容包括
+git cat-file -p efdae
+blob 文件
+tree 代表文件夹
+
+这样就能定义所有对象的hash存储方式。
+commit history
+parent 指向前面一个对象
+HEAD指向master branch中最新commit对象。
+commit 对象 hash值
+tree 对象   hash值
+blob 对象   hash值
+
+10、HEAD详解。
+.git文件夹内HEAD文件。
+ref: refs/headers/master
+看下master内容。
+git cat-file -t 1447。。。这个就是最后一个commit对象。
+
+git log --oneline应该就是第一个commit
+master就是分支branch。
+
+git rev-parse HEAD  查看对象指向的hash值
+git rev-parse master~4 等同于在master分支下的 HEAD~4
+git rev~parse HEAD~4^{tree}
+git rev-parse HEAD~4:code.py
+
+git cat-file // git show   专业术语 tree-ish
+
+11、创建和删除分支。
+git branch  查看分支
+git branch tryidea   创建分支 在refs里面创建了一个新的文件夹
+git checkout tryidea 切换分支 然后切换分支就是讲.git HEAD文件夹中的名字换成新的tryidea
+git branch -d tryidea 删除分支
+git checkout -b xxx  创建并直接切换分支
+
+12、 合并分支
+git merge tryidea 属于 fast forward
+非 fast forward 合并
+3 way merge 
+
+13、版本控制系统
