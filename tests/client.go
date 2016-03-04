@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"net"
+	"os"
+	"syscall"
+	"time"
 )
 
 func main() {
@@ -14,6 +17,16 @@ func main() {
 	}
 	// defer os.Remove(path)
 	// defer conn.Close()
+	for {
+		time.Sleep(5000 * time.Millisecond)
+		f, err := os.Open("/tmp/server.sock")
+		if err != nil && os.IsNotExist(err) {
+			continue
+		}
+		fmt.Printf("file exist!\n")
+		defer f.Close()
+		break
+	}
 
 	coreAddr, err := net.ResolveUnixAddr("unixgram", "/tmp/server.sock")
 	if err != nil {
