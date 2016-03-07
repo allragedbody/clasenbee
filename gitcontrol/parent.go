@@ -1,4 +1,4 @@
-package main
+package gitcontrol
 
 import (
 	"fmt"
@@ -50,7 +50,7 @@ func createChild() {
 	}
 }
 
-func main() {
+func InitGitServe() {
 	// initContract()
 	//
 	//

@@ -2,6 +2,7 @@ package main
 
 import (
 	// "allragedbody.com/clasenbee/models"
+	"allragedbody.com/clasenbee/gitcontrol"
 	_ "allragedbody.com/clasenbee/routers"
 	// . "fmt"
 	"github.com/astaxie/beego"
@@ -15,5 +16,6 @@ func main() {
 	// }
 	// Println("Config file load Success")
 	// models.MysqlLoad(conf)
+	go gitcontrol.InitGitServe()
 	beego.Run()
 }

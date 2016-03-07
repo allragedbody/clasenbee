@@ -1,0 +1,24 @@
+安装第三方库
+git2go是一个用go代码操作git的库，需要依赖于第三方库libgit2
+
+安装libgit2前，先安装相应的包：
+
+
+yum -y install libssh2-devel
+
+在 https://github.com/libgit2/libgit2 下载libgit2的代码进行安装：
+
+mkdir build && cd build
+cmake ..
+cmake --build . --target install
+
+然后下载git2go：
+
+go get -d github.com/libgit2/git2go
+-d表示只把代码下载不安装
+进行git2go的目录，执行：
+
+
+git checkout next
+git submodule update --init # get libgit2
+make install
