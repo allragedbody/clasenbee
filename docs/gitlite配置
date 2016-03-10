@@ -11,7 +11,9 @@ useradd dcms
 如果想要客户端可以连接服务器端，就需要将客户端的公钥提供给服务端。
 客户端进入dcms用户，生成公钥秘钥对
 su - dcms
-ssh-keygen -t rsa -C HF
+
+hn=`hostname`
+ssh-keygen -t rsa -C $hn -f gitolite
 
 [dcms@BJ-UNI-1-JCS-104 ~]$ cd .ssh
 [dcms@BJ-UNI-1-JCS-104 .ssh]$ ll

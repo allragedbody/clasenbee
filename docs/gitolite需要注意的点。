@@ -1,0 +1,12 @@
+ git add --all
+ git commit -m "1"
+ git push
+
+
+1、git repo的位置在建立之初就确定为用户名${HOME}下建立仓库，修改到别的地方。
+软连接方式解决
+mv repositories /export/servers/
+ln -s  /export/servers/repositories repositories
+
+2、gitolite里面配置的名称是key.pub的前缀。
+3、gitolite使用的是ssh初始化的公钥和私钥。必须是id_rsa，id_rsa.pub，（不知道怎么修改）
