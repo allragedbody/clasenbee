@@ -3,9 +3,16 @@ package main
 import (
 	"fmt"
 	// "allragedbody.com/clasenbee/models"
+<<<<<<< HEAD
 	// _ "allragedbody.com/clasenbee/routers"
 
 	// "github.com/astaxie/beego"
+=======
+	"allragedbody.com/clasenbee/gitcontrol"
+	_ "allragedbody.com/clasenbee/routers"
+	// . "fmt"
+	"github.com/astaxie/beego"
+>>>>>>> 99720f79b42e70b2b3fe1ddbdc0903a1da27ba3f
 	// "github.com/astaxie/beego/config"
 )
 
@@ -140,6 +147,7 @@ func main() {
 	// }
 	// Println("Config file load Success")
 	// models.MysqlLoad(conf)
+<<<<<<< HEAD
 
 	server := &Server{}
 	cw := &Configurator{}
@@ -162,4 +170,8 @@ func main() {
 
 	// reloadConfig()
 	// beego.Run()
+=======
+	go gitcontrol.InitGitServe()
+	beego.Run()
+>>>>>>> 99720f79b42e70b2b3fe1ddbdc0903a1da27ba3f
 }

@@ -20,65 +20,65 @@ type GitClient struct {
 // var NetHandler *Client
 
 // type Client struct {
-// 	l    *net.UnixAddr
-// 	r    *net.UnixAddr
-// 	conn *net.UnixConn
+//  l    *net.UnixAddr
+//  r    *net.UnixAddr
+//  conn *net.UnixConn
 // }
 
 // func initContract() {
-// 	var err error
-// 	NetHandler = &Client{}
-// 	NetHandler.l, err = net.ResolveUnixAddr("unixgram", "/tmp/gitclient.sock")
-// 	if err != nil {
-// 		fmt.Println("init gitlocal.sock error")
-// 	}
-// 	NetHandler.r, err = net.ResolveUnixAddr("unixgram", "/tmp/gitserver.sock")
-// 	if err != nil {
-// 		fmt.Println("init gitlocal.sock error")
-// 	}
-// 	defer os.Remove("/tmp/gitlocal.sock")
-// 	// func ListenUnixgram(net string, laddr *UnixAddr) (*UnixConn, error)
+//  var err error
+//  NetHandler = &Client{}
+//  NetHandler.l, err = net.ResolveUnixAddr("unixgram", "/tmp/gitclient.sock")
+//  if err != nil {
+//      fmt.Println("init gitlocal.sock error")
+//  }
+//  NetHandler.r, err = net.ResolveUnixAddr("unixgram", "/tmp/gitserver.sock")
+//  if err != nil {
+//      fmt.Println("init gitlocal.sock error")
+//  }
+//  defer os.Remove("/tmp/gitlocal.sock")
+//  // func ListenUnixgram(net string, laddr *UnixAddr) (*UnixConn, error)
 
-// 	NetHandler.conn, err = net.DialUnix("unixgram", NetHandler.l, NetHandler.r)
-// 	if err != nil {
-// 		fmt.Println("init connection error")
-// 	}
+//  NetHandler.conn, err = net.DialUnix("unixgram", NetHandler.l, NetHandler.r)
+//  if err != nil {
+//      fmt.Println("init connection error")
+//  }
 
-// 	for {
+//  for {
 
-// 		NetHandler.conn.Write([]byte("hello"))
-// 		defer func() {
-// 			NetHandler.conn.Close()
-// 		}()
+//      NetHandler.conn.Write([]byte("hello"))
+//      defer func() {
+//          NetHandler.conn.Close()
+//      }()
 
-// 		time.Sleep(time.Second)
-// 		b := make([]byte, 64)
-// 		_, _, err2 := NetHandler.conn.ReadFrom(b)
-// 		fmt.Println(string(b) + "\n")
-// 		if err2 != nil {
-// 			fmt.Printf("ReadFrom error\n")
-// 		}
-// 		fmt.Printf("read:[%s]\n", string(b))
-// 	}
+//      time.Sleep(time.Second)
+//      b := make([]byte, 64)
+//      _, _, err2 := NetHandler.conn.ReadFrom(b)
+//      fmt.Println(string(b) + "\n")
+//      if err2 != nil {
+//          fmt.Printf("ReadFrom error\n")
+//      }
+//      fmt.Printf("read:[%s]\n", string(b))
+//  }
 
 // }
 
 // // func createContract() {
 
 // // if err != nil {
-// // 	fmt.Println("ListenUnixgram err")
+// //   fmt.Println("ListenUnixgram err")
 // // }
 
 // // coreAddr, err := net.ResolveUnixAddr("unixgram", "/tmp/server.sock")
 // // if err != nil {
-// // 	fmt.Println("ResolveUnixAddr err")
+// //   fmt.Println("ResolveUnixAddr err")
 // // }
 
 // // buf := make([]byte, 512*1024)
 // // buf = []byte{'a', 'b', 'c', 'd'}
 // // n, err := localConn.WriteTo(buf, coreAddr)
 // // if err != nil {
-// // 	fmt.Printf("[core] write to unix socket err: %v", err)
+// //   fmt.Printf("[core] write to unix socket err: %v", err)
 
 // // }
 
