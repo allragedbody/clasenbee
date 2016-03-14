@@ -3,16 +3,12 @@ package main
 import (
 	"fmt"
 	// "allragedbody.com/clasenbee/models"
-<<<<<<< HEAD
+
 	// _ "allragedbody.com/clasenbee/routers"
 
 	// "github.com/astaxie/beego"
-=======
-	"allragedbody.com/clasenbee/gitcontrol"
-	_ "allragedbody.com/clasenbee/routers"
-	// . "fmt"
-	"github.com/astaxie/beego"
->>>>>>> 99720f79b42e70b2b3fe1ddbdc0903a1da27ba3f
+
+	// "allragedbody.com/clasenbee/gitcontrol"
 	// "github.com/astaxie/beego/config"
 )
 
@@ -32,6 +28,8 @@ type GitWorker interface {
 }
 
 type ServerWorker interface {
+	CreateModule()
+	Check()
 	Reload(s string) string
 }
 
@@ -39,11 +37,11 @@ type Configurator struct {
 }
 
 type Giter struct {
-	giter string
+	Giter string
 }
 
 type Processor struct {
-	process string
+	Process string
 }
 
 type DBConfig struct {
@@ -108,11 +106,11 @@ func (w *Giter) GitPush() string {
 	return "GitPush"
 }
 func (w *Giter) GitPull() string {
-	return "GitPull"
+	return w.Giter
 }
 
 func (w *Processor) Reload(s string) string {
-	return "Reload"
+	return w.Process
 }
 
 type Server struct {
@@ -137,7 +135,7 @@ func initConfig(sconfig *ServeConfig) {
 
 func StartApiServer(sc *ServeConfig, server *Server) {
 	fmt.Printf("Start Api %v %v ", sc, server.GitWorker.GitCommit())
-
+	// beego.Run()
 }
 
 func main() {
@@ -147,12 +145,11 @@ func main() {
 	// }
 	// Println("Config file load Success")
 	// models.MysqlLoad(conf)
-<<<<<<< HEAD
 
 	server := &Server{}
 	cw := &Configurator{}
-	gw := &Giter{}
-	pw := &Processor{}
+	gw := &Giter{"localhost"}
+	pw := &Processor{"nginx reload"}
 	server.ConfigWorker = cw
 	server.GitWorker = gw
 	server.ServerWorker = pw
@@ -168,10 +165,6 @@ func main() {
 	fmt.Println("Start Api Worker, Config is ", ServerConfig)
 	StartApiServer(&ServerConfig, server)
 
-	// reloadConfig()
-	// beego.Run()
-=======
-	go gitcontrol.InitGitServe()
-	beego.Run()
->>>>>>> 99720f79b42e70b2b3fe1ddbdc0903a1da27ba3f
+	// go gitcontrol.InitGitServe()
+
 }

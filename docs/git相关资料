@@ -139,3 +139,9 @@ git merge tryidea 属于 fast forward
 创建仓库并上传
 git remote add nginx root@192.168.56.103:nginx.git
 
+echo "# study" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin root@192.168.56.103:allragedbody/ats.git
+git push -u origin master
