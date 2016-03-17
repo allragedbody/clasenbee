@@ -1,0 +1,60 @@
+SetEnv GIT_PROJECT_ROOT /path/to/repos
+SetEnv GIT_HTTP_EXPORT_ALL
+ScriptAlias /git/ /usr/libexec/git-core/git-http-backend/
+
+<Directory /path/to/repos>
+    Options FollowSymLinks
+    AllowOverride None
+    Order Allow,Deny
+    Allow from all
+
+    # 启用 WebDAV
+    DAV on
+
+    # 简单口令认证
+    AuthType Basic
+    AuthName "Git Repository"
+    AuthBasicProvider file
+    # 该口令文件用 htpasswd 命令进行管理
+    AuthUserFile /path/to/.git-passwd
+    Require valid-user
+
+    # 基于主机IP的认证和基于口令的认证必须同时满足
+    Satisfy All
+</Directory>
+
+<LocationMatch "^/git/.*/git-receive-pack$">
+  AuthType Basic
+  AuthName "Git Access"
+  AuthType Basic
+  AuthBasicProvider file
+  AuthUserFile /path/to/.git-passwd
+</LocationMatch>
+
+<Location /git/private>
+  AuthType Basic
+  AuthName "Git Access"
+  AuthType Basic
+  AuthBasicProvider file
+  AuthUserFile  /path/to/.git-passwd
+</Location>
+
+  htpasswd -c /path/to/.git-passwd git
+ git clone http://192.168.56.111/git/nginx.git
+
+SetEnv GIT_PROJECT_ROOT /var/www/git
+SetEnv GIT_HTTP_EXPORT_ALL
+ScriptAlias /git/ /usr/libexec/git-core/git-http-backend/
+
+注意版本库内要执行这个
+git config --file config http.receivepack true
+
+
+htpasswd -c /path/to/.git-passwd git
+
+git add --all
+git commit -m "1"
+git push origin master
+
+
+git update-server-info
