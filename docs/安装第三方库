@@ -7,6 +7,7 @@ git2go是一个用go代码操作git的库，需要依赖于第三方库libgit2
 yum -y install libssh2-devel
 
 在 https://github.com/libgit2/libgit2 下载libgit2的代码进行安装：
+git clone https://github.com/libgit2/libgit2.git
 
 mkdir build && cd build
 cmake ..

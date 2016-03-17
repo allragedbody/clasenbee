@@ -39,7 +39,7 @@ func checkFatal(err error) {
 	fmt.Printf("Fail at %v:%v; %v", file, line, err)
 }
 
-func createRepo() *git.Repository {
+func CreateRepo() *git.Repository {
 	// figure out where we can create the test repo
 	// path, err := ioutil.TempDir(".", "git2go")
 	// checkFatal(err)
@@ -55,6 +55,37 @@ func createRepo() *git.Repository {
 	return repo
 }
 
+// func credentialsCallback(url string, username string, allowedTypes git.CredType) (git.ErrorCode, *git.Cred) {
+// 	ret, cred := git.NewCredSshKey("git", "/var/www/testgo/git/id_rsa.pub", "/var/www/testgo/git/id_rsa", "")
+// 	return git.ErrorCode(ret), &cred
+// }
+
+// func certificateCheckCallback(cert *git.Certificate, valid bool, hostname string) git.ErrorCode {
+// 	return 0
+// }
+
+// func CloneRepo() *git.Repository {
+// 	// figure out where we can create the test repo
+// 	// path, err := ioutil.TempDir(".", "git2go")
+// 	// checkFatal(err)
+// 	path := "./git2go"
+// 	repo, err := git.InitRepository(path, false)
+// 	checkFatal(err)
+
+// 	tmpfile := "README"
+// 	err = ioutil.WriteFile(path+"/"+tmpfile, []byte("foo\n"), 0644)
+
+// 	checkFatal(err)
+
+// 	return repo
+// }
+
 func main() {
-	createRepo()
+	// CreateRepo()
+	repo, err := git.Clone("root@192.168.150.73:ats.git", "ats", &git.CloneOptions{})
+	if err != nil {
+		checkFatal(err)
+	}
+	fmt.Println(repo)
+
 }

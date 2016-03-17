@@ -145,3 +145,16 @@ git add README.md
 git commit -m "first commit"
 git remote add origin root@192.168.56.103:allragedbody/ats.git
 git push -u origin master
+
+
+找到资源的hash值
+ echo 'git' | git hash-object -w --stdin x.paipaiimg.conf|tail -n1
+
+获取该文件内容（x.paipaiimg.conf）
+git cat-file -p 998776ebba43e856d6f030ee067e442e745ea1d5
+该文件类型
+git cat-file -t 998776ebba43e856d6f030ee067e442e745ea1d5 
+
+
+获取一份儿内容的hash值
+ echo 'test content' | git hash-object -w --stdin

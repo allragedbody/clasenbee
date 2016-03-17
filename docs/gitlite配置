@@ -12,8 +12,8 @@ useradd dcms
 客户端进入dcms用户，生成公钥秘钥对
 su - dcms
 
-hn=`hostname`
-ssh-keygen -t rsa -C $hn -f gitolite
+	hn=`hostname`
+	ssh-keygen -t rsa -C $hn -f gitolite
 
 [dcms@BJ-UNI-1-JCS-104 ~]$ cd .ssh
 [dcms@BJ-UNI-1-JCS-104 .ssh]$ ll
@@ -28,11 +28,12 @@ total 8
 su - dcms
 git clone https://github.com/sitaramc/gitolite.git
 
-安装gitolite
+安装gitolite\把客户端的公钥拿过来放到自己的库中。
 mkdir -p ${HOME}/bin
 ${HOME}/gitolite/install -to ${HOME}/bin
-把客户端的公钥拿过来放到自己的库中。
 ${HOME}/bin/gitolite setup -pk /tmp/id_rsa.pub
+
+
 
 服务端将公钥安装后，客户端就可以无密码clone服务端的admin配置了。
 su - dcms
@@ -42,3 +43,29 @@ git clone dcms@192.168.56.103:gitolite-admin.git
 
 客户端的定位，客户端本身其实就是公钥管理服务器。
 git pull origin master
+
+cd /root/.ssh
+hn=`hostname`
+ssh-keygen -t rsa -C $hn
+cp id_rsa.pub /tmp/
+cd ..
+git clone https://github.com/sitaramc/gitolite.git
+mkdir -p ${HOME}/bin
+${HOME}/gitolite/install -to ${HOME}/bin
+${HOME}/bin/gitolite setup -pk /tmp/id_rsa.pub
+sudo chmod g+r projects.list 
+sudo chmod -R g+rx repositories
+yum -y install gitweb highlight
+
+
+git add --all
+git commit -m "1"
+git push origin master
+
+mkdir /var/VMdisks/
+cd /var/VMdisks/
+mv /root/glibc-2.14 .
+cd glibc-2.14
+mkdir build 
+cd build  
+../configure --prefix=/opt/glibc-2.14  && make -j4   && make install  
